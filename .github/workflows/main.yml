@@ -1,43 +1,27 @@
-name: C++ Build and Test
-
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Set up C++ environment
-        uses: actions/setup-cpp@v2
-        with:
-          compiler: 'gcc' # You can choose 'clang' if you prefer
-
-      - name: Compile C++ code
-        run: hello_world.cpp
-
-      - name: Execute C++ program
-        run: ./hello_world
-
-      - name: Run arithmetic calculations
-        run: |
-          a=100
-          b=20
-          sum=$((a + b))
-          difference=$((a - b))
-          product=$((a * b))
-          quotient=$((a / b))
-          remainder=$((a % b))
-          echo "Sum: $sum"
-          echo "Difference: $difference"
-          echo "Product: $product"
-          echo "Quotient: $quotient"
-          echo "Remainder: $remainder"
+# run_cpp.yml
+tasks:
+  - label: "Build and Run hello_world.cpp"
+    type: shell
+    command: g++ hello_world.cpp -o hello_world.exe
+    group: {
+      "kind": "build",
+      "isDefault": true
+    }
+    problemMatcher: []
+    dependsOn: []
+    presentation: {
+      "reveal": "always",
+      "panel": "new"
+    }
+  - label: "Run hello_world.exe"
+    type: process
+    command: hello_world.exe
+    group: {
+      "kind": "test",
+      "isDefault": true
+    }
+    dependsOn: "Build and Run hello_world.cpp"
+    presentation: {
+      "reveal": "always",
+      "panel": "new"
+    }
