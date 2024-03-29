@@ -1,0 +1,44 @@
+name: C++ Build and Test
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up C++ environment
+        uses: actions/setup-cpp@v2
+        with:
+          compiler: 'gcc' # You can choose 'clang' if you prefer
+
+      - name: Compile C++ code
+        run: |
+          g++ -o hello_world hello_world.cpp
+
+      - name: Execute C++ program
+        run: ./hello_world
+
+      - name: Run arithmetic calculations
+        run: |
+          a=100
+          b=20
+          sum=$((a + b))
+          difference=$((a - b))
+          product=$((a * b))
+          quotient=$((a / b))
+          remainder=$((a % b))
+          echo "Sum: $sum"
+          echo "Difference: $difference"
+          echo "Product: $product"
+          echo "Quotient: $quotient"
+          echo "Remainder: $remainder"
