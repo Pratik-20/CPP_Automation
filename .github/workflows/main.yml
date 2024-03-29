@@ -22,8 +22,7 @@ jobs:
           compiler: 'gcc' # You can choose 'clang' if you prefer
 
       - name: Compile C++ code
-        run: |
-          g++ -o hello_world hello_world.cpp
+        run: hello_world.cpp
 
       - name: Execute C++ program
         run: ./hello_world
